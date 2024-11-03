@@ -1,9 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
-export enum Role{
-    SuperAdmin = 'superadmin',
-    Admin='admin',
-    User='user',
+export enum Role {
+  SuperAdmin = 'superadmin',
+  Admin = 'admin',
+  User = 'user',
 }
 @Schema({ timestamps: true })
 export class User {
@@ -12,10 +12,10 @@ export class User {
   @IsNotEmpty()
   username: string;
 
-  @Prop()
+  @Prop({ unique: true })
   @IsEmail()
   @IsNotEmpty()
-  email:string;
+  email: string;
 
   @Prop()
   @IsString()
@@ -23,10 +23,8 @@ export class User {
   @MinLength(6)
   password: string;
 
-  @Prop()
+  @Prop({ default: Role.User })
   role: Role;
-
- 
 }
 
-export const UserSchema=SchemaFactory.createForClass(User);
+export const UserSchema = SchemaFactory.createForClass(User);
