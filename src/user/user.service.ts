@@ -28,6 +28,9 @@ export class UserService {
   }
   async findAll() {
     const allUser = await this.userModel.find().exec();
+    if (allUser.length === 0) {
+      throw new NotFoundException('No user found');
+    }
     return allUser;
   }
 
