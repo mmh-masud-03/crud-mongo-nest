@@ -1,10 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
-export enum Role {
-  SuperAdmin = 'superadmin',
-  Admin = 'admin',
-  User = 'user',
-}
+import { Role } from 'src/auth/enum/roles.enum';
+
 @Schema({ timestamps: true })
 export class User {
   @Prop()
